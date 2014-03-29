@@ -1,0 +1,17 @@
+{
+  "uuid": "3a2da2ad-ddf8-4266-b640-0e056d63e621",
+  "shortName": "norsk",
+  "longName": "norsk",
+  "companyName": "asbkar",
+  "versionCode": 2,
+  "versionLabel": "2.0.0",
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
