@@ -1,5 +1,6 @@
 #include "num2words.h"
 #include "string.h"
+#include "pebble.h"
 
 static const char* const ONES[] = {
   "tolv",
@@ -72,14 +73,16 @@ static size_t append_string(char* buffer, const size_t length, const char* str) 
   return (length > written) ? written : length;
 }
 
-void fuzzy_time_to_words(int hours, int minutes, char* words, size_t length) {
-  int fuzzy_hours = hours;
-  int fuzzy_minutes = minutes;
+void fuzzy_time_to_words(uint8_t hours, uint8_t minutes, char* words, size_t length, uint8_t showPrefix) {
+  uint8_t fuzzy_hours = hours;
+  uint8_t fuzzy_minutes = minutes;
 
   size_t remaining = length;
   memset(words, 0, length);
 
-  remaining -= append_string(words, remaining, "Klokka er ");
+  if (showPrefix == 1) {
+    remaining -= append_string(words, remaining, "Klokka er ");
+  }
   if (fuzzy_minutes != 0) {
     if (fuzzy_minutes == 15) {
       remaining -= append_string(words, remaining, "kvart over ");
@@ -108,4 +111,7 @@ void fuzzy_time_to_words(int hours, int minutes, char* words, size_t length) {
   }
 
     remaining -= append_number(words, fuzzy_hours % 12);
+  if (showPrefix == 0) {
+    words[0] = words[0] - 32;
+  }
 }

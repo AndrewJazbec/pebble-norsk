@@ -1,17 +1,33 @@
 {
-  "uuid": "3a2da2ad-ddf8-4266-b640-0e056d63e621",
-  "shortName": "norsk",
-  "longName": "norsk",
-  "companyName": "asbkar",
-  "versionCode": 2,
-  "versionLabel": "2.0.0",
-  "watchapp": {
-    "watchface": true
-  },
-  "appKeys": {
-    "dummy": 0
-  },
-  "resources": {
-    "media": []
-  }
+    "versionLabel": "2.1.0",
+    "uuid": "6d0cea8e-5a4e-42d2-bce1-3aab543152f9",
+    "appKeys": {
+        "klokkaer": 0
+    },
+    "longName": "norsk",
+    "versionCode": 210,
+    "capabilities": [
+        "configurable"
+    ],
+    "shortName": "norsk",
+    "companyName": "asbkar",
+    "watchapp": {
+        "watchface": true
+    },
+    "resources": {
+        "media": []
+    },
+    "preferences": {
+        "url": "http://pebble-norsk.s3-website-eu-west-1.amazonaws.com/configurable.html",
+        "items": [
+            {
+                "name": "klokkaer",
+                "title": "Vis Klokka er",
+                "type": "boolean",
+                "on-text": "Ja",
+                "off-text": "Nei",
+                "default": true
+            }
+        ]
+    }
 }
