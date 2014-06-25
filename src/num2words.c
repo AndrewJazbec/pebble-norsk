@@ -31,14 +31,14 @@ static const char* const TEENS[] ={
 static const char* const TENS[] = {
   "",
   "ti",
-  "tjue",
-  "tretti",
-  "førti",
-  "femti",
-  "seksti",
-  "søtti",
-  "åtti",
-  "nitti"
+  "tjue"
+//  "tretti",
+//  "førti",
+//  "femti",
+//  "seksti",
+//  "søtti",
+//  "åtti",
+//  "nitti"
 };
 
 static size_t append_number(char* words, int num) {
@@ -92,7 +92,7 @@ void fuzzy_time_to_words(uint8_t hours, uint8_t minutes, char* words, size_t len
     } else if (fuzzy_minutes == 30) {
       remaining -= append_string(words, remaining, "halv ");
       fuzzy_hours = (fuzzy_hours + 1) % 24;
-    } else if (fuzzy_minutes < 15) {
+    } else if (fuzzy_minutes < 20) {
       remaining -= append_number(words, fuzzy_minutes);
       remaining -= append_string(words, remaining, " over ");
     } else if (fuzzy_minutes < 30) {
@@ -112,6 +112,12 @@ void fuzzy_time_to_words(uint8_t hours, uint8_t minutes, char* words, size_t len
 
     remaining -= append_number(words, fuzzy_hours % 12);
   if (showPrefix == 0) {
-    words[0] = words[0] - 32;
+    int firstChar = words[0];
+    int secondChar = words[1];
+    if(firstChar == 195 && secondChar == 165) {
+        words[1] = 133;
+    } else {
+        words[0] = words[0] - 32;
+    }
   }
 }
