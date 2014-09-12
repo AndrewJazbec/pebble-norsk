@@ -10,7 +10,7 @@ static const char* const ONES[] = {
   "fire",
   "fem",
   "seks",
-  "sju",
+  "syv",
   "åtte",
   "ni"
 };
@@ -81,7 +81,7 @@ void fuzzy_time_to_words(uint8_t hours, uint8_t minutes, char* words, size_t len
   memset(words, 0, length);
 
   if (showPrefix == 1) {
-    remaining -= append_string(words, remaining, "Klokka er ");
+    remaining -= append_string(words, remaining, "Klokken er ");
   }
   if (fuzzy_minutes != 0) {
     if (fuzzy_minutes == 15) {
