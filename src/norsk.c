@@ -23,7 +23,27 @@ static void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
   update_time(tick_time);
 }
 
-static void window_load(Window *window) {}
+void tick_handler(struct tm *tick_time, TimeUnits units_changed){
+if (units_changed & DAY_UNIT) {
+    current_time = time(NULL);
+    strftime(date_string, sizeof(date_string), "%a, %b %d", localtime(&current_time));
+    layer_mark_dirty(text_layer_get_layer(date_text_layer));
+  }
+}
+
+static void window_load(Window *window) {
+//Setup the date display
+  current_time = time(NULL);
+  strftime(date_string, sizeof(date_string), "%a, %b %d", localtime(&current_time));
+  date_text_layer = text_layer_create(GRect(4, 140, 88, 18));
+  text_layer_set_text(date_text_layer, date_string);
+	text_layer_set_font(date_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+ 
+  layer_add_child(window_layer, text_layer_get_layer(date_text_layer));
+  
+  //Setup hour and minute handlers
+  tick_timer_service_subscribe((MINUTE_UNIT | HOUR_UNIT | DAY_UNIT), tick_handler);
+}
 
 static void window_appear(Window *window){
   time_t now = time(NULL);
