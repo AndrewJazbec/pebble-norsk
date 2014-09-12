@@ -11,6 +11,9 @@ static struct CommonWordsData {
 
 Window *window;
 
+char date_string[64];
+TextLayer *date_text_layer = NULL;
+
 static void update_time(struct tm* t) {
   fuzzy_time_to_words(t->tm_hour, t->tm_min, s_data.buffer, BUFFER_SIZE, getKlokkaer());
   text_layer_set_text(s_data.label, s_data.buffer);
