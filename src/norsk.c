@@ -11,6 +11,7 @@ static struct CommonWordsData {
 
 Window *window;
 
+time_t current_time;
 char date_string[64];
 TextLayer *date_text_layer = NULL;
 
@@ -32,17 +33,6 @@ if (units_changed & DAY_UNIT) {
 }
 
 static void window_load(Window *window) {
-//Setup the date display
-  current_time = time(NULL);
-  strftime(date_string, sizeof(date_string), "%a, %b %d", localtime(&current_time));
-  date_text_layer = text_layer_create(GRect(4, 140, 88, 18));
-  text_layer_set_text(date_text_layer, date_string);
-	text_layer_set_font(date_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
- 
-  layer_add_child(window_layer, text_layer_get_layer(date_text_layer));
-  
-  //Setup hour and minute handlers
-  tick_timer_service_subscribe((MINUTE_UNIT | HOUR_UNIT | DAY_UNIT), tick_handler);
 }
 
 static void window_appear(Window *window){
@@ -73,18 +63,35 @@ static void init(void) {
 	});
 
   window_set_background_color(window, GColorBlack);
-  GFont font = fonts_get_system_font(FONT_KEY_DROID_SERIF_28_BOLD);
+  //GFont font = fonts_get_system_font(FONT_KEY_DROID_SERIF_28_BOLD);
 
   Layer *root_layer = window_get_root_layer(window);
   GRect frame = layer_get_frame(root_layer);
 
-  s_data.label = text_layer_create(GRect(0, 20, frame.size.w, frame.size.h - 20));
+  s_data.label = text_layer_create(GRect(0, 18, frame.size.w, frame.size.h));
   text_layer_set_background_color(s_data.label, GColorBlack);
   text_layer_set_text_color(s_data.label, GColorWhite);
-  text_layer_set_font(s_data.label, font);
+  text_layer_set_font(s_data.label, fonts_get_system_font(FONT_KEY_BITHAM_30_BLACK));
   layer_add_child(root_layer, text_layer_get_layer(s_data.label));
 
   tick_timer_service_subscribe(MINUTE_UNIT, &handle_minute_tick);
+  
+  //date
+  
+  //Setup the date display
+  current_time = time(NULL);
+  strftime(date_string, sizeof(date_string), "%m/%d/%y", localtime(&current_time));
+  date_text_layer = text_layer_create(GRect(4, 142, 88, 30));
+  text_layer_set_background_color(date_text_layer, GColorBlack);
+  text_layer_set_text_color(date_text_layer, GColorWhite);
+  text_layer_set_font(date_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+  text_layer_set_text(date_text_layer, date_string);
+ 
+  layer_add_child(root_layer, text_layer_get_layer(date_text_layer));
+  
+  //Setup hour and minute handlers
+  tick_timer_service_subscribe((MINUTE_UNIT | HOUR_UNIT | DAY_UNIT), tick_handler);
+  
   window_stack_push(window, true);
 }
 

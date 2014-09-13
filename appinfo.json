@@ -1,20 +1,21 @@
 {
-    "versionLabel": "2.1.1",
-    "uuid": "6d0cea8e-5a4e-42d2-bce1-3aab543152f9",
     "appKeys": {
         "klokkaer": 0
     },
-    "longName": "norsk",
-    "versionCode": 211,
     "capabilities": [
         "configurable"
     ],
-    "shortName": "norsk",
     "companyName": "asbkar",
-    "watchapp": {
-        "watchface": true
-    },
+    "longName": "norsk",
+    "projectType": "native",
     "resources": {
         "media": []
+    },
+    "shortName": "norsk",
+    "uuid": "6d0cea8e-5a4e-42d2-bce1-3aab543152f9",
+    "versionCode": 211,
+    "versionLabel": "2.1.1",
+    "watchapp": {
+        "watchface": true
     }
 }
